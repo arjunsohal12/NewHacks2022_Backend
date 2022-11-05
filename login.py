@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 
 
-def Create_Account_Dict(database) -> dict[str, tuple[str, list]]:
+def Create_Account_Dict(database):
     output = dict({})
     with open(database) as f:
         reader = csv.reader(f, delimiter=',')
