@@ -168,7 +168,15 @@ def event_in_range():
                 
     
     
-                
+@app.route('/get_names', methods = ['GET'])
+def get_names():
+    output = []
+    filename = 'spoof.csv'
+    with open (filename) as f:
+        reader = csv.reader(f)
+        for line in reader:
+            output.append(line[0])
+    return json.dumps({"Names_of_Events":output})               
     
     
 if __name__ == "__main__":
