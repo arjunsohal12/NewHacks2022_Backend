@@ -99,7 +99,7 @@ def return_events():
     with open (filename) as f:
         reader = csv.reader(f)
         for line in reader:
-            if int(line[-1]) == id:
+            if int(line[2]) == id:
                 for i in range(len(line)):
                     if i not in (0, 1, 2):
                         events.append(line[i])
