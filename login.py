@@ -18,7 +18,7 @@ def Create_Account_Dict(database):
         # next(reader)
 
         for account in reader:
-            output[account[0]] = (account[1], account[2], account[3])
+            output[account[0]] = (account[1], account[2])
     return output
 
 
