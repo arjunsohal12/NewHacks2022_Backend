@@ -59,7 +59,6 @@ def create_account():
                 for item in line:
                     item = item.strip()
                 if line != [''] and line !=['\n'] and line != []:
-                    print(line)
                     keylist.append(line[-1])
                 if email in line:
                     account_exists = True
@@ -85,9 +84,13 @@ def create_account():
          
             # Close the file object
             f_object.close()
-        return json.dumps(True)
+        return json.dumps({"email": email, "user_exists": True, 
+                           "password": True, "id": key})
     else:
-        return json.dumps(False)
+        account_data = Create_Account_Dict('dummy_accounts.csv')
+        id = account_data[email][3]
+        return json.dumps({"email": email, "user_exists": True, 
+                           "password": True, "id": id})
 
 if __name__ == "__main__":
     app.run(debug=True, port=3001)
