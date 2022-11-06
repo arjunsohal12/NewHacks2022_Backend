@@ -101,7 +101,7 @@ def return_events():
         for line in reader:
             if int(line[-1]) == id:
                 for i in range(len(line)):
-                    if i not in (0, 1, len(line)-1):
+                    if i not in (0, 1, 2):
                         events.append(line[i])
                 
     return json.dumps({"Events": events})
