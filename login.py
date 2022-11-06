@@ -67,8 +67,9 @@ def create_account():
     if account_exists == False:
         account_info.append(email)
         account_info.append(password)
-        account_info.append([])
         account_info.append(key)
+        account_info.append([])
+
     
         
         with open(filename, 'a') as f_object:
