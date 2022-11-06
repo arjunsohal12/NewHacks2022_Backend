@@ -59,7 +59,7 @@ def create_account():
                 for item in line:
                     item = item.strip()
                 if line != [''] and line !=['\n'] and line != []:
-                    keylist.append(line[-1])
+                    keylist.append(line[2])
                 if email in line:
                     account_exists = True
     while key in keylist:
