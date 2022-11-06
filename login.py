@@ -93,6 +93,8 @@ def create_account():
                            "password": True, "id": id})
 @app.route('/return_events', methods = ['POST'])
 def return_events():
+    request_data = request.get_json()
+    id = request_data['id']
     filename = 'dummy_accounts.csv'
     events = []
     with open (filename) as f:
