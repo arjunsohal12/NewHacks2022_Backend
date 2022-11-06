@@ -143,7 +143,7 @@ def is_in_range(location_coord: tuple, event_coord: tuple, event_radius: float):
         return False
     
 
-@app.route('/event_in_range', methods = ['POST'])
+@app.route('/event_in_range', methods = ['GET'])
 def event_in_range():
     request_data = request.get_json()
     location_coords = request_data['location_coords']
@@ -152,8 +152,10 @@ def event_in_range():
     with open (filename) as f:
         reader = csv.reader(f)
         for line in reader:
-            if is_in_range(location_coords, (int(line[1]), int(line[2])), 10.0):
+            if is_in_range(location_coords, (float(line[1]), float(line[2])), 10.0):
                 output.append(line)
+                
+    return json.dumps({"Events_in_range": output})
                 
     return json.dumps({"Events_in_range": output})
     
