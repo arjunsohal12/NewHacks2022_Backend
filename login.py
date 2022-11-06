@@ -103,7 +103,7 @@ def return_events():
                     if i not in (0, 1, 2):
                         events.append(line[i])
     output = []
-    filename3 = 'dummy_data.csv'
+    filename2 = 'dummy_data.csv'
     with open (filename2) as wf:
         reader = csv.reader(wf)
         for line in reader:
