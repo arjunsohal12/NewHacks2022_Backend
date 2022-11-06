@@ -6,6 +6,7 @@ import requests
 import random
 from typing import TextIO
 from csv import writer
+from math import radians, cos, sin, asin, sqrt
 
 app = Flask(__name__)
 CORS(app)
@@ -106,6 +107,55 @@ def return_events():
                 
     return json.dumps({"Events": events})
 
+def distance(location_coord, event_coord):
+    location_lat = float(location_coord[0])
+    location_lon = float(location_coord[1])
+    event_lat = float(event_coord[0])
+    event_lon = float(event_coord[1])
+     
+    # The math module contains a function named
+    # radians which converts from degrees to radians.
+    location_lon = radians(location_lon)
+    event_lon = radians(event_lon)
+    location_lat = radians(location_lat)
+    event_lat = radians(event_lat)
+
+    # Haversine formula
+    dlon = event_lon - location_lon
+    dlat = event_lat - location_lat
+    a = sin(dlat / 2)**2 + cos(location_lat) * cos(event_lat) * sin(dlon / 2)**2
+ 
+    c = 2 * asin(sqrt(a))
+    
+    # Radius of earth in kilometers. Use 3956 for miles
+    r = 6371
+      
+    # calculate the result
+    return(c * r)
+
+
+
+def is_in_range(location_coord: tuple, event_coord: tuple, event_radius: float):
+    distance_calc = distance((location_coord[0], location_coord[1]), (event_coord[0], event_coord[1]))
+    if distance_calc <= event_radius:
+        return True
+    else:
+        return False
+    
+
+@app.route('/event_in_range', methods = ['POST'])
+def event_in_range():
+    request_data = request.get_json()
+    location_coords = request_data['location_coords']
+    output = []
+    filename = 'spoof.csv'
+    with open (filename) as f:
+        reader = csv.reader(f)
+        for line in reader:
+            if is_in_range(location_coords, (int(line[1]), int(line[2])), 10.0):
+                output.append(line)
+                
+    return json.dumps({"Events_in_range": output})
     
                 
     
