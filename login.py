@@ -36,6 +36,7 @@ def account_verify():
 
     return json.dumps({"email": email, "user_exists": User_Exists, "password": Password_Correct, "id": id})
 
+
 @app.route('/create_account', methods = ['POST'])
 def create_account():
     filename = 'dummy_accounts.csv'
@@ -81,6 +82,9 @@ def create_account():
          
             # Close the file object
             f_object.close()
+        return json.dumps(True)
+    else:
+        return json.dumps(False)
 
 if __name__ == "__main__":
     app.run(debug=True, port=3001)
