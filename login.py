@@ -93,8 +93,6 @@ def create_account():
                            "password": True, "id": id})
 @app.route('/return_events', methods = ['POST'])
 def return_events():
-    request_data = request.get_json()
-    id = request_data['id']
     filename = 'dummy_accounts.csv'
     events = []
     with open (filename) as f:
@@ -104,8 +102,14 @@ def return_events():
                 for i in range(len(line)):
                     if i not in (0, 1, 2):
                         events.append(line[i])
-                
-    return json.dumps({"Events": events})
+    output = []
+    filename3 = 'dummy_data.csv'
+    with open (filename2) as wf:
+        reader = csv.reader(wf)
+        for line in reader:
+            if line[0] in events:
+                output.append(line)
+    return json.dumps({"Events": output})
 
 def distance(location_coord, event_coord):
     location_lat = float(location_coord[0])
@@ -150,7 +154,7 @@ def event_in_range():
     latitude = request_data['lat']
     location_coords = (latitude, longitude)
     output = []
-    filename = 'spoof.csv'
+    filename = 'dummy_data.csv'
     with open (filename) as f:
         reader = csv.reader(f)
         for line in reader:
