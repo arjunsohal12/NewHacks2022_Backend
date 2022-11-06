@@ -157,7 +157,7 @@ def event_in_range():
     latitude = request_data['lat']
     location_coords = (float(latitude), float(longitude))
     output = []
-    filename = 'spoof.csv'
+    filename = 'dummy_data.csv'
     with open (filename) as f:
         reader = csv.reader(f)
         for line in reader:
@@ -171,7 +171,7 @@ def event_in_range():
 @app.route('/get_names', methods = ['GET'])
 def get_names():
     output = []
-    filename = 'spoof.csv'
+    filename = 'dummy_data.csv'
     with open (filename) as f:
         reader = csv.reader(f)
         for line in reader:
