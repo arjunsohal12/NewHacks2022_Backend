@@ -104,7 +104,7 @@ def return_events():
                 for i in range(len(line)):
                     if i not in (0, 1, 2):
                         events.append(line[i])
-     return json.dumps({"Events": events})
+    return json.dumps({"Events": events})
 #     output = []
 #     filename2 = 'dummy_data.csv'
 #     with open (filename2) as wf:
