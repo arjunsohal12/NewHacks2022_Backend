@@ -2,6 +2,5 @@ flask
 requests
 gunicorn
 flask_cors
-random
 csv
 typing
