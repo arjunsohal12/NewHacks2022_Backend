@@ -104,14 +104,15 @@ def return_events():
                 for i in range(len(line)):
                     if i not in (0, 1, 2):
                         events.append(line[i])
-    output = []
-    filename2 = 'dummy_data.csv'
-    with open (filename2) as wf:
-        reader = csv.reader(wf)
-        for line in reader:
-            if line[0] in events:
-                output.append(line)
-    return json.dumps({"Events": output})
+      return json.dumps({"Events": events})
+#     output = []
+#     filename2 = 'dummy_data.csv'
+#     with open (filename2) as wf:
+#         reader = csv.reader(wf)
+#         for line in reader:
+#             if line[0] in events:
+#                 output.append(line)
+#     return json.dumps({"Events": output})
 
 def distance(location_coord, event_coord):
     location_lat = float(location_coord[0])
