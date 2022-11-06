@@ -1,10 +1,11 @@
 import json
 import csv
 from flask import Flask, request, send_file
+from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
-
+CORS(app)
 
 def Create_Account_Dict(database):
     output = dict({})
