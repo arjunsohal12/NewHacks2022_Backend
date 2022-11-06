@@ -155,16 +155,16 @@ def event_in_range():
     request_data = request.get_json()
     longitude = request_data['lon']
     latitude = request_data['lat']
-    event_name = request_data['name']
     location_coords = (float(latitude), float(longitude))
     output = []
-    filename = 'dummy_data.csv'
+    filename = 'spoof.csv'
     with open (filename) as f:
         reader = csv.reader(f)
         for line in reader:
-            if event_name == line[0]:
-                if is_in_range(location_coords, (float(line[1]), float(line[2])), 10.0):
-                    return json.dumps({"Events_in_range": line})
+            if is_in_range(location_coords, (float(line[1]), float(line[2])), 10.0):
+                output.append(line)
+                
+    return json.dumps({"Events_in_range": output})
                 
     
     
