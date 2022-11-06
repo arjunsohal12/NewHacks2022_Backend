@@ -90,6 +90,25 @@ def create_account():
         id = account_data[email][3]
         return json.dumps({"email": email, "user_exists": True, 
                            "password": True, "id": id})
+@app.route('/return_events', methods = ['POST'])
+def return_events():
+    request_data = request.get_json()
+    id = request_data['id']
+    filename = 'dummy_accounts.csv'
+    events = []
+    with open (filename) as f:
+        reader = csv.reader(f)
+        for line in reader:
+            if int(line[-1]) == id:
+                for i in range(len(line)):
+                    if i not in (0, 1, len(line)-1):
+                        events.append(line[i])
+                
+    return json.dumps({"Events": events})
 
+    
+                
+    
+    
 if __name__ == "__main__":
     app.run(debug=True, port=3001)
